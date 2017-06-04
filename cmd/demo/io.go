@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	posModelFile = `pos_stanfordtags_universalrel.final.model`
-	depModelFile = `dep_stanfordtags_universalrel.final.model`
+	posModelFile = `model/pos_stanfordtags_universalrel.final.model`
+	depModelFile = `model/dep_stanfordtags_universalrel.final.model`
 	brownCluster = `clusters.txt`
 )
 

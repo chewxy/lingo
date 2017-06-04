@@ -2,7 +2,6 @@ package dep
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/chewxy/lingo"
 	"github.com/chewxy/lingo/corpus"
@@ -39,7 +38,6 @@ func New(m *Model) *Parser {
 func (d *Parser) Run() {
 	defer close(d.Output)
 	for sentence := range d.Input {
-		log.Printf("Sentence: %d", len(sentence))
 		dep, err := d.predict(sentence)
 
 		if err != nil {
@@ -52,6 +50,12 @@ func (d *Parser) Run() {
 }
 
 func (d *Parser) predict(sentence lingo.AnnotatedSentence) (*lingo.Dependency, error) {
+	// defer func() {
+	// 	if r := recover(); r != nil {
+	// 		log.Printf("Parsing for %q", sentence.ValueString())
+	// 		panic(r)
+	// 	}
+	// }()
 	c := newConfiguration(sentence, false)
 
 	var err error

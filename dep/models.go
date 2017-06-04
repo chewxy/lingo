@@ -8,6 +8,7 @@ import (
 	"io"
 	"os"
 
+	"github.com/chewxy/gorgonia/tensor"
 	"github.com/chewxy/lingo/corpus"
 	"github.com/pkg/errors"
 )
@@ -20,6 +21,18 @@ type Model struct {
 }
 
 func (m *Model) Corpus() *corpus.Corpus { return m.corpus }
+
+func (m *Model) WordEmbeddings() *tensor.Dense {
+	val := m.nn.e_w.Value().(*tensor.Dense)
+	emb := val.Clone().(*tensor.Dense)
+	return emb
+}
+
+func (m *Model) POSTagEmbeddings() *tensor.Dense {
+	val := m.nn.e_t.Value().(*tensor.Dense)
+	emb := val.Clone().(*tensor.Dense)
+	return emb
+}
 
 func (m *Model) String() string {
 	var buf bytes.Buffer

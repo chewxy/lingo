@@ -343,6 +343,7 @@ func (nn *neuralnetwork2) train(examples []example) error {
 	return nil
 }
 
+// pred predicts the index of the transitions
 func (nn *neuralnetwork2) pred(ind []int) (int, error) {
 	nn.feats2vec(ind)
 
@@ -350,7 +351,7 @@ func (nn *neuralnetwork2) pred(ind []int) (int, error) {
 	// logger := log.New(f, "", 0)
 	// logger := log.New(os.Stderr, "", 0)
 
-	// m := G.NewLispMachine(nn.sub, G.ExecuteFwdOnly(), G.WithLogger(logger), G.WithWatchlist(), G.LogBothDir())
+	// m := G.NewLispMachine(nn.sub, G.ExecuteFwdOnly(), G.WithLogger(logger), G.WithWatchlist(), G.LogBothDir(), G.WithValueFmt("%+3.3v"))
 	m := G.NewLispMachine(nn.sub, G.ExecuteFwdOnly())
 	if err := m.RunAll(); err != nil {
 		return 0, err

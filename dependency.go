@@ -215,4 +215,4 @@ type edgeByID []DependencyEdge
 
 func (b edgeByID) Len() int           { return len(b) }
 func (b edgeByID) Swap(i, j int)      { b[i], b[j] = b[j], b[i] }
-func (b edgeByID) Less(i, j int) bool { return b[i].Gov.ID < b[j].Gov.ID }
+func (b edgeByID) Less(i, j int) bool { return b[i].Dep.ID < b[j].Dep.ID }
