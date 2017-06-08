@@ -36,6 +36,29 @@ func New() *Corpus {
 	return c
 }
 
+// Construct creates a Corpus given the construction options. This allows for more flexibility
+func Construct(opts ...ConsOpt) (*Corpus, error) {
+	c := new(Corpus)
+	for _, opt := range opts {
+		if err := opt(c); err != nil {
+			return nil, err
+		}
+	}
+
+	// checks
+	if c.words == nil {
+		c.words = make([]string, 0)
+	}
+	if c.frequencies == nil {
+		c.frequencies = make([]int, 0)
+	}
+	if c.ids == nil {
+		c.ids = make(map[string]int)
+	}
+
+	return c, nil
+}
+
 // ID returns the ID of a word and whether or not it was found in the corpus
 func (c *Corpus) Id(word string) (int, bool) {
 	id, ok := c.ids[word]
