@@ -64,4 +64,7 @@ type WordEmbeddings interface {
 
 	// Vector returns a vector of embeddings given the word ID
 	Vector(id int) (vec tensor.Tensor, err error)
+
+	// Embedding returns the matrix
+	Embedding() tensor.Tensor
 }

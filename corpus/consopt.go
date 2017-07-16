@@ -36,4 +36,5 @@ func WithWords(a []string) ConsOpt {
 		c.maxWordLength = maxWL
 		return nil
 	}
+	return f
 }
