@@ -2,10 +2,10 @@ package dep
 
 import (
 	G "github.com/chewxy/gorgonia"
-	"github.com/chewxy/gorgonia/tensor"
 	"github.com/chewxy/lingo"
 	"github.com/chewxy/lingo/corpus"
 	"github.com/pkg/errors"
+	"gorgonia.org/tensor"
 )
 
 // may is a simple monad for handling errors

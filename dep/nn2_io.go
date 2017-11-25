@@ -6,8 +6,8 @@ import (
 	"fmt"
 
 	G "github.com/chewxy/gorgonia"
-	T "github.com/chewxy/gorgonia/tensor"
 	"github.com/pkg/errors"
+	T "gorgonia.org/tensor"
 )
 
 var empty struct{}

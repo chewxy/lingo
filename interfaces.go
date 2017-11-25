@@ -3,7 +3,7 @@ package lingo
 import (
 	"encoding/gob"
 
-	"github.com/chewxy/gorgonia/tensor"
+	"gorgonia.org/tensor"
 )
 
 // Lemmatizer is anything that can lemmatize

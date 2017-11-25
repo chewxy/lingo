@@ -2,7 +2,7 @@ package corpus
 
 import (
 	"github.com/chewxy/gorgonia"
-	"github.com/chewxy/gorgonia/tensor"
+	"gorgonia.org/tensor"
 )
 
 // LDAModel ... TODO

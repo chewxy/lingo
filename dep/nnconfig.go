@@ -5,8 +5,8 @@ import (
 	"encoding/gob"
 	"fmt"
 
-	"github.com/chewxy/gorgonia/tensor"
 	"github.com/pkg/errors"
+	"gorgonia.org/tensor"
 )
 
 // NNConfig configures the neural network
