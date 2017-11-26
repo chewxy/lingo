@@ -38,3 +38,12 @@ func WithWords(a []string) ConsOpt {
 	}
 	return f
 }
+
+// WithSize preallocates all the things in Corpus
+func WithSize(size int) ConsOpt {
+	return func(c *Corpus) error {
+		c.words = make([]string, 0, size)
+		c.frequencies = make([]int, 0, size)
+		return nil
+	}
+}
