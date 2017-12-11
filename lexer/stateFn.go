@@ -186,7 +186,8 @@ func lexWhitespace(l *Lexer) (fn stateFn) {
 func lexPunctuation(l *Lexer) (fn stateFn) {
 	next := l.next()
 
-	if next == '\'' {
+	switch next {
+	case '\'':
 		l.accept()
 		n := l.peek()
 		switch n {
@@ -196,7 +197,7 @@ func lexPunctuation(l *Lexer) (fn stateFn) {
 			l.emit(lingo.Word)
 			return lexWhitespace
 		}
-	} else if next == '.' {
+	case '.':
 		l.accept()
 		// for cases such as "U.S" or "i.e"
 		n := l.peek()
@@ -206,8 +207,9 @@ func lexPunctuation(l *Lexer) (fn stateFn) {
 			l.accept()
 			return lexText
 		}
+	default:
+		// log.Printf("Next %q", next)
 	}
-	l.accept()
 	l.acceptRunFn(unicode.IsPunct) // check for any other runs of punctuations
 	l.emit(lingo.Punctuation)
 	// if l.acceptRunFn(unicode.IsPunct) {
