@@ -114,7 +114,6 @@ func lexText(l *Lexer) (fn stateFn) {
 // Upon stopping, it checks to see if the next value is a '.'. If it is, then it's a decimal value, and continues a run
 // Upon stopping a second time, it checks for 'e' or 'E', for exponentiation - 1.2E2
 func lexNumber(l *Lexer) (fn stateFn) {
-	//
 	l.acceptRunFn(unicode.IsDigit)
 
 	next := l.next()
@@ -151,6 +150,10 @@ func lexNumber(l *Lexer) (fn stateFn) {
 	}
 	l.backup()
 
+	if l.buf.Len() == 1 && l.buf.Bytes()[0] == '-' {
+		l.emit(lingo.Punctuation) // dash
+		return lexWhitespace
+	}
 	l.emit(lingo.Number)
 	return lexWhitespace
 }
@@ -204,6 +207,7 @@ func lexPunctuation(l *Lexer) (fn stateFn) {
 			return lexText
 		}
 	}
+	l.accept()
 	l.acceptRunFn(unicode.IsPunct) // check for any other runs of punctuations
 	l.emit(lingo.Punctuation)
 	// if l.acceptRunFn(unicode.IsPunct) {
