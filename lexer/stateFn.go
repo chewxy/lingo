@@ -210,12 +210,12 @@ func lexPunctuation(l *Lexer) (fn stateFn) {
 	default:
 		// log.Printf("Next %q", next)
 	}
-	l.acceptRunFn(unicode.IsPunct) // check for any other runs of punctuations
-	l.emit(lingo.Punctuation)
-	// if l.acceptRunFn(unicode.IsPunct) {
-	// 	l.emit(lingo.Punctuation)
-	// }
 
+	accepted := l.acceptRunFn(unicode.IsPunct) // check for any other runs of punctuations
+	if accepted == 0 && unicode.IsPunct(next) {
+		l.accept()
+	}
+	l.emit(lingo.Punctuation)
 	return lexWhitespace
 }
 

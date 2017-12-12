@@ -98,6 +98,14 @@ var lexerTests = []lexerTest{
 		{"", lingo.EOF, 0, 14},
 	}},
 
+	{"parens should be printed", "like (this)", []lingo.Lexeme{
+		{"like", lingo.Word, 0, 1},
+		{"(", lingo.Punctuation, 0, 5},
+		{"this", lingo.Word, 0, 6},
+		{")", lingo.Punctuation, 0, 10},
+		{"", lingo.EOF, 0, 11},
+	}},
+
 	{"abbrev", "USB, made in U.S.A. e.g", []lingo.Lexeme{
 		{"USB", lingo.Word, 0, 1},
 		{",", lingo.Punctuation, 0, 4},
