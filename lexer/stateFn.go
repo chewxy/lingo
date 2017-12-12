@@ -29,6 +29,7 @@ func lexText(l *Lexer) (fn stateFn) {
 					return lexNumber
 				}
 			case next == ':':
+				// possible URI
 				if l.peek() == '/' {
 					l.accept() // accept ':'
 					l.next()
@@ -185,7 +186,6 @@ func lexWhitespace(l *Lexer) (fn stateFn) {
 
 func lexPunctuation(l *Lexer) (fn stateFn) {
 	next := l.next()
-
 	switch next {
 	case '\'':
 		l.accept()
@@ -208,14 +208,17 @@ func lexPunctuation(l *Lexer) (fn stateFn) {
 			return lexText
 		}
 	default:
-		// log.Printf("Next %q", next)
 	}
 
 	accepted := l.acceptRunFn(unicode.IsPunct) // check for any other runs of punctuations
-	if accepted == 0 && unicode.IsPunct(next) {
+	punct := unicode.IsPunct(next)
+	if accepted == 0 && punct {
 		l.accept()
 	}
 	l.emit(lingo.Punctuation)
+	if accepted == 0 && !punct && !unicode.IsSpace(next) {
+		return lexText
+	}
 	return lexWhitespace
 }
 
