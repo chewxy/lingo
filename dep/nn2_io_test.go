@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"testing"
 
-	G "github.com/chewxy/gorgonia"
 	"github.com/chewxy/lingo"
 	"github.com/chewxy/lingo/corpus"
+	G "gorgonia.org/gorgonia"
 )
 
 func TestNNIO(t *testing.T) {

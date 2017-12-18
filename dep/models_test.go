@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	G "github.com/chewxy/gorgonia"
 	"github.com/stretchr/testify/assert"
+	G "gorgonia.org/gorgonia"
 )
 
 func TestModel_SaveLoad(t *testing.T) {

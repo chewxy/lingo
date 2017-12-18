@@ -5,8 +5,8 @@ import (
 	"encoding/gob"
 	"fmt"
 
-	G "github.com/chewxy/gorgonia"
 	"github.com/pkg/errors"
+	G "gorgonia.org/gorgonia"
 	T "gorgonia.org/tensor"
 )
 

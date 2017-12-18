@@ -1,10 +1,10 @@
 package dep
 
 import (
-	G "github.com/chewxy/gorgonia"
 	"github.com/chewxy/lingo"
 	"github.com/chewxy/lingo/corpus"
 	"github.com/pkg/errors"
+	G "gorgonia.org/gorgonia"
 	"gorgonia.org/tensor"
 )
 
