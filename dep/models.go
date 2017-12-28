@@ -8,9 +8,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/chewxy/gorgonia/tensor"
 	"github.com/chewxy/lingo/corpus"
 	"github.com/pkg/errors"
+	"gorgonia.org/tensor"
 )
 
 // Model holds the neural network that a DependencyParser uses. To train, use a Trainer

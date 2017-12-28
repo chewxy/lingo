@@ -5,7 +5,7 @@ import (
 
 	"github.com/chewxy/lingo/corpus"
 
-	G "github.com/chewxy/gorgonia"
+	G "gorgonia.org/gorgonia"
 )
 
 func TestTrainerInitializations(t *testing.T) {

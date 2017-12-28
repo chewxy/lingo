@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/chewxy/gorgonia/tensor"
 	"github.com/chewxy/lingo/dep"
 	"github.com/chewxy/lingo/treebank"
+	"gorgonia.org/tensor"
 )
 
 var trainTB []treebank.SentenceTag

@@ -122,11 +122,13 @@ func (l *Lexer) acceptRun(valid string) (accepted bool) {
 	return
 }
 
-func (l *Lexer) acceptRunFn(fn func(rune) bool) {
+func (l *Lexer) acceptRunFn(fn func(rune) bool) (accepted int) {
 	for fn(l.peek()) {
 		l.next()
 		l.accept()
+		accepted++
 	}
+	return
 }
 
 func (l *Lexer) ignore() {

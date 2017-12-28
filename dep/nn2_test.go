@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/chewxy/gorgonia"
 	"github.com/chewxy/lingo/corpus"
+	"gorgonia.org/gorgonia"
 )
 
 func TestNN2(t *testing.T) {

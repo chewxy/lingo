@@ -89,6 +89,30 @@ var lexerTests = []lexerTest{
 		{"", lingo.EOF, 0, 10},
 	}},
 
+	{"plain dashes should not be numbers", "this case - like so", []lingo.Lexeme{
+		{"this", lingo.Word, 0, 1},
+		{"case", lingo.Word, 0, 5},
+		{"-", lingo.Punctuation, 0, 6},
+		{"like", lingo.Word, 0, 8},
+		{"so", lingo.Word, 0, 13},
+		{"", lingo.EOF, 0, 14},
+	}},
+
+	{"parens should be printed", "like (this)", []lingo.Lexeme{
+		{"like", lingo.Word, 0, 1},
+		{"(", lingo.Punctuation, 0, 5},
+		{"this", lingo.Word, 0, 6},
+		{")", lingo.Punctuation, 0, 10},
+		{"", lingo.EOF, 0, 11},
+	}},
+
+	{"midstream puncuation", "like:this", []lingo.Lexeme{
+		{"like", lingo.Word, 0, 1},
+		{":", lingo.Punctuation, 0, 5},
+		{"this", lingo.Word, 0, 6},
+		{"", lingo.EOF, 0, 7},
+	}},
+
 	{"abbrev", "USB, made in U.S.A. e.g", []lingo.Lexeme{
 		{"USB", lingo.Word, 0, 1},
 		{",", lingo.Punctuation, 0, 4},
@@ -105,6 +129,11 @@ var lexerTests = []lexerTest{
 		{"00:00", lingo.Time, 0, 1},
 		{"00:00:00", lingo.Time, 0, 20},
 		{"", lingo.EOF, 0, 20},
+	}},
+
+	{"date time with dashes", "31-12-1970", []lingo.Lexeme{
+		{"31/12/1970", lingo.Date, 0, 1},
+		{"", lingo.EOF, 0, 11},
 	}},
 
 	{"URI", "wobsite: http://www.wobsite.something.this/is/still/a.url", []lingo.Lexeme{

@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"fmt"
 
-	G "github.com/chewxy/gorgonia"
-	T "github.com/chewxy/gorgonia/tensor"
 	"github.com/pkg/errors"
+	G "gorgonia.org/gorgonia"
+	T "gorgonia.org/tensor"
 )
 
 var empty struct{}

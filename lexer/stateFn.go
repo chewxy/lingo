@@ -29,6 +29,7 @@ func lexText(l *Lexer) (fn stateFn) {
 					return lexNumber
 				}
 			case next == ':':
+				// possible URI
 				if l.peek() == '/' {
 					l.accept() // accept ':'
 					l.next()
@@ -114,7 +115,6 @@ func lexText(l *Lexer) (fn stateFn) {
 // Upon stopping, it checks to see if the next value is a '.'. If it is, then it's a decimal value, and continues a run
 // Upon stopping a second time, it checks for 'e' or 'E', for exponentiation - 1.2E2
 func lexNumber(l *Lexer) (fn stateFn) {
-	//
 	l.acceptRunFn(unicode.IsDigit)
 
 	next := l.next()
@@ -151,6 +151,10 @@ func lexNumber(l *Lexer) (fn stateFn) {
 	}
 	l.backup()
 
+	if l.buf.Len() == 1 && l.buf.Bytes()[0] == '-' {
+		l.emit(lingo.Punctuation) // dash
+		return lexWhitespace
+	}
 	l.emit(lingo.Number)
 	return lexWhitespace
 }
@@ -182,8 +186,8 @@ func lexWhitespace(l *Lexer) (fn stateFn) {
 
 func lexPunctuation(l *Lexer) (fn stateFn) {
 	next := l.next()
-
-	if next == '\'' {
+	switch next {
+	case '\'':
 		l.accept()
 		n := l.peek()
 		switch n {
@@ -193,7 +197,7 @@ func lexPunctuation(l *Lexer) (fn stateFn) {
 			l.emit(lingo.Word)
 			return lexWhitespace
 		}
-	} else if next == '.' {
+	case '.':
 		l.accept()
 		// for cases such as "U.S" or "i.e"
 		n := l.peek()
@@ -203,13 +207,18 @@ func lexPunctuation(l *Lexer) (fn stateFn) {
 			l.accept()
 			return lexText
 		}
+	default:
 	}
-	l.acceptRunFn(unicode.IsPunct) // check for any other runs of punctuations
-	l.emit(lingo.Punctuation)
-	// if l.acceptRunFn(unicode.IsPunct) {
-	// 	l.emit(lingo.Punctuation)
-	// }
 
+	accepted := l.acceptRunFn(unicode.IsPunct) // check for any other runs of punctuations
+	punct := unicode.IsPunct(next)
+	if accepted == 0 && punct {
+		l.accept()
+	}
+	l.emit(lingo.Punctuation)
+	if accepted == 0 && !punct && !unicode.IsSpace(next) {
+		return lexText
+	}
 	return lexWhitespace
 }
 
