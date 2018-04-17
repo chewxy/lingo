@@ -85,7 +85,7 @@ func (a *Annotation) HeadID() int {
 }
 
 func (a *Annotation) IsNumber() bool {
-	return IsNumber(a.POSTag) && (a.LexemeType != Date || a.LexemeType != Time || a.LexemeType != URI)
+	return IsNumber(a.POSTag) && (a.LexemeType != Date && a.LexemeType != Time && a.LexemeType != URI)
 }
 
 func (a *Annotation) String() string {
