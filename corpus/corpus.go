@@ -39,11 +39,6 @@ func New() *Corpus {
 // Construct creates a Corpus given the construction options. This allows for more flexibility
 func Construct(opts ...ConsOpt) (*Corpus, error) {
 	c := new(Corpus)
-	for _, opt := range opts {
-		if err := opt(c); err != nil {
-			return nil, err
-		}
-	}
 
 	// checks
 	if c.words == nil {
@@ -54,6 +49,12 @@ func Construct(opts ...ConsOpt) (*Corpus, error) {
 	}
 	if c.ids == nil {
 		c.ids = make(map[string]int)
+	}
+
+	for _, opt := range opts {
+		if err := opt(c); err != nil {
+			return nil, err
+		}
 	}
 
 	return c, nil
