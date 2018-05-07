@@ -14,7 +14,7 @@ func TestTrainerInitializations(t *testing.T) {
 
 	d = NewTrainer(WithCorpus(c))
 	if d.corpus != c {
-		t.Error("Expected Corpus to be set to %p. Got %p instead", c, d.corpus)
+		t.Errorf("Expected Corpus to be set to %p. Got %p instead", c, d.corpus)
 	}
 
 	d = NewTrainer(WithConfig(DefaultNNConfig))

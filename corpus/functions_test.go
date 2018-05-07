@@ -77,7 +77,7 @@ func TestDL(t *testing.T) {
 	s1 := DamerauLevenshtein(a, a)
 	s2 := DamerauLevenshtein(a, b)
 	if s1 != 0 {
-		t.Error("Expected the distance to be 0 when compared against itself. Got %d", s1)
+		t.Errorf("Expected the distance to be 0 when compared against itself. Got %d", s1)
 	}
 
 	if s2 < s1 {
@@ -91,7 +91,7 @@ func TestDL(t *testing.T) {
 	s2 = DamerauLevenshtein(c, d)
 
 	if s1 != 0 {
-		t.Error("Expected the distance to be 0 when compared against itself. Got %d", s1)
+		t.Errorf("Expected the distance to be 0 when compared against itself. Got %d", s1)
 	}
 	if s2 < s1 {
 		t.Error("Expected DL similarity to be greater when compared against itself")
