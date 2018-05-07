@@ -33,11 +33,11 @@ var toLoad, toTrain bool
 
 func init() {
 	if lingo.BUILD_TAGSET != "stanfordtags" && lingo.BUILD_TAGSET != "universaltags" {
-		log.Fatal("Tagset %q unsupported", lingo.BUILD_TAGSET)
+		log.Fatalf("Tagset %q unsupported", lingo.BUILD_TAGSET)
 	}
 
 	if lingo.BUILD_RELSET != "stanfordrel" && lingo.BUILD_RELSET != "universalrel" {
-		log.Fatal("Relset %q unsupported", lingo.BUILD_RELSET)
+		log.Fatalf("Relset %q unsupported", lingo.BUILD_RELSET)
 	}
 }
 

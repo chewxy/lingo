@@ -77,35 +77,35 @@ Weights2              : (%d, 200)
 	}
 
 	if !G.ValueEq(nn.e_w.Value(), nn2.e_w.Value()) {
-		t.Error("Expected e_w to be the same. Expected %1.1s. Got %1.1s", nn.e_w.Value(), nn2.e_w.Value())
+		t.Errorf("Expected e_w to be the same. Expected %1.1s. Got %1.1s", nn.e_w.Value(), nn2.e_w.Value())
 	}
 
 	if !G.ValueEq(nn.e_t.Value(), nn2.e_t.Value()) {
-		t.Error("Expected e_t to be the same. Expected %1.1s. Got %1.1s", nn.e_t.Value(), nn2.e_t.Value())
+		t.Errorf("Expected e_t to be the same. Expected %1.1s. Got %1.1s", nn.e_t.Value(), nn2.e_t.Value())
 	}
 
 	if !G.ValueEq(nn.e_l.Value(), nn2.e_l.Value()) {
-		t.Error("Expected e_l to be the same. Expected %1.1s. Got %1.1s", nn.e_l.Value(), nn2.e_l.Value())
+		t.Errorf("Expected e_l to be the same. Expected %1.1s. Got %1.1s", nn.e_l.Value(), nn2.e_l.Value())
 	}
 
 	if !G.ValueEq(nn.w1_w.Value(), nn2.w1_w.Value()) {
-		t.Error("Expected w1_w to be the same. Expected %1.1s. Got %1.1s", nn.w1_w.Value(), nn2.w1_w.Value())
+		t.Errorf("Expected w1_w to be the same. Expected %1.1s. Got %1.1s", nn.w1_w.Value(), nn2.w1_w.Value())
 	}
 
 	if !G.ValueEq(nn.w1_t.Value(), nn2.w1_t.Value()) {
-		t.Error("Expected w1_t to be the same. Expected %1.1s. Got %1.1s", nn.w1_t.Value(), nn2.w1_t.Value())
+		t.Errorf("Expected w1_t to be the same. Expected %1.1s. Got %1.1s", nn.w1_t.Value(), nn2.w1_t.Value())
 	}
 
 	if !G.ValueEq(nn.w1_l.Value(), nn2.w1_l.Value()) {
-		t.Error("Expected w1_l to be the same. Expected %1.1s. Got %1.1s", nn.w1_l.Value(), nn2.w1_l.Value())
+		t.Errorf("Expected w1_l to be the same. Expected %1.1s. Got %1.1s", nn.w1_l.Value(), nn2.w1_l.Value())
 	}
 
 	if !G.ValueEq(nn.b.Value(), nn2.b.Value()) {
-		t.Error("Expected b to be the same. Expected %1.1s. Got %1.1s", nn.b.Value(), nn2.b.Value())
+		t.Errorf("Expected b to be the same. Expected %1.1s. Got %1.1s", nn.b.Value(), nn2.b.Value())
 	}
 
 	if !G.ValueEq(nn.w2.Value(), nn2.w2.Value()) {
-		t.Error("Expected w2 to be the same. Expected %1.1s. Got %1.1s", nn.w2.Value(), nn2.w2.Value())
+		t.Errorf("Expected w2 to be the same. Expected %1.1s. Got %1.1s", nn.w2.Value(), nn2.w2.Value())
 	}
 
 	t.Logf("Visual Inspection: \n%+1.8s\n%+1.8s", nn.e_w.Value(), nn2.e_w.Value())

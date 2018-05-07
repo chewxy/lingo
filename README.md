@@ -2,6 +2,8 @@
 
 <img src="https://raw.githubusercontent.com/chewxy/lingo/master/media/gopher_small.png" align="right" />
 
+[![Build Status](https://travis-ci.org/chewxy/lingo.svg?branch=master)](https://travis-ci.org/chewxy/lingo)
+
 package `lingo` provides the data structures and algorithms required for natural language processing.
 
 Specifically, it provides a POS Tagger (`lingo/pos`), a Dependency Parser (`lingo/dep`), and a basic tokenizer (`lingo/lexer`) for English. It also provides data structures for holding corpuses (`lingo/corpus`), and treebanks (`lingo/treebank`).
@@ -30,7 +32,7 @@ A natural language pipeline with this package is heavily channels driven. Here's
 ```go
 func main() {
 	inputString: `The cat sat on the mat`
-	lx := lexer.New("dummy", strings.NewReader(inputString)) // lexer - required to break a sentence up into words. 
+	lx := lexer.New("dummy", strings.NewReader(inputString)) // lexer - required to break a sentence up into words.
 	pt := pos.New(pos.WithModel(posModel))                   // POS Tagger - required to tag the words with a part of speech tag.
 	dp := dep.New(depModel)                                  // Creates a new parser
 
@@ -62,7 +64,7 @@ func main() {
 # How It Works #
 For specific tasks (POS tagging, parsing, named entity recognition etc), refer to the README of each subpackage. This package on its own mainly provides the data structures that the subpackages will use.
 
-Perhaps the most important data structure is the `*Annotation` structure. It basically holds a word and the associated metadata for the word. 
+Perhaps the most important data structure is the `*Annotation` structure. It basically holds a word and the associated metadata for the word.
 
 For dependency parses, the graph takes three forms: `*Dependency`, `*DependencyTree` and `*Annotation`. All three forms are convertable from one to another. TODO: explain rationale behind each data type.
 
@@ -70,20 +72,20 @@ For dependency parses, the graph takes three forms: `*Dependency`, `*DependencyT
 
 ### Very Oddly Specific POS Tags and Dependency Rel Types ###
 
-A particular quirk you may have noticed is that the `POSTag` and `DependencyType` are hard coded in as constants. This package does in fact provide two variations of each: one from Stanford/Penn Treebank and one from [UniversalDependencies](http://universaldependencies.org/). 
+A particular quirk you may have noticed is that the `POSTag` and `DependencyType` are hard coded in as constants. This package does in fact provide two variations of each: one from Stanford/Penn Treebank and one from [UniversalDependencies](http://universaldependencies.org/).
 
-The main reason for hardcoding these are mainly for performance reasons - knowing ahead how much to allocate reduces a lot of additional work the program has to do. It also reduces the chances of mutating a global variable. 
+The main reason for hardcoding these are mainly for performance reasons - knowing ahead how much to allocate reduces a lot of additional work the program has to do. It also reduces the chances of mutating a global variable.
 
-Of course this comes as a tradeoff - programs are limited to these two options. Thankfully there are only a limited number of POS Tag and Dependency Relation types. Two of the most popular ones (Stanford/PTB and Universal Dependencies) have been implemented. 
+Of course this comes as a tradeoff - programs are limited to these two options. Thankfully there are only a limited number of POS Tag and Dependency Relation types. Two of the most popular ones (Stanford/PTB and Universal Dependencies) have been implemented.
 
 The following build tags are supported:
 
 * stanfordtags
-* universaltags 
+* universaltags
 * stanfordrel
 * universalrel
 
-To use a specific tagset or relset, build your program thusly: `go build -tags='stanfordtags'`. 
+To use a specific tagset or relset, build your program thusly: `go build -tags='stanfordtags'`.
 
 The default tag and dependency rel types are the universal dependencies version.
 
