@@ -1,4 +1,14 @@
 language: go
-  go:
-    - "1.9"
-    - "1.10"
+
+branches:
+  only:
+    - master
+go:
+  - 1.8.x
+  - 1.9.x
+  - 1.10.x
+  - tip
+
+matrix:
+  allow_failures:
+    - go: tip
