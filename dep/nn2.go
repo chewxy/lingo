@@ -321,7 +321,7 @@ func (nn *neuralnetwork2) train(examples []example) error {
 
 			nn.vm.Reset()
 		}
-		if err := nn.solver.Step(nn.model); err != nil {
+		if err := nn.solver.Step(G.NodesToValueGrads(nn.model)); err != nil {
 			err = errors.Wrapf(err, "Stepping on the model failed %v", batch)
 			return err
 		}
