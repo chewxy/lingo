@@ -39,6 +39,36 @@ func WithWords(a []string) ConsOpt {
 	return f
 }
 
+// WithOrderedWords creates a Corpus with the given word order
+func WithOrderedWords(a []string) ConsOpt {
+	f := func(c *Corpus) error {
+		s := a
+		c.words = s
+		c.frequencies = make([]int, len(s))
+		for i := range c.frequencies {
+			c.frequencies[i] = 1
+		}
+
+		ids := make(map[string]int)
+		maxID := len(s)
+		totalFreq := len(s)
+		var maxWL int
+		for i, w := range a {
+			if len(w) > maxWL {
+				maxWL = len(w)
+			}
+			ids[w] = i
+		}
+
+		c.ids = ids
+		atomic.AddInt64(&c.maxid, int64(maxID))
+		c.totalFreq = totalFreq
+		c.maxWordLength = maxWL
+		return nil
+	}
+	return f
+}
+
 // WithSize preallocates all the things in Corpus
 func WithSize(size int) ConsOpt {
 	return func(c *Corpus) error {
