@@ -55,6 +55,14 @@ func (l *Lexer) Run() {
 	}
 }
 
+// Reset resets the buffers. It creates a new Output and Error channel
+func (l *Lexer) Reset(r io.Reader) {
+	l.input.Reset(r)
+	l.buf.Reset()
+	l.Output = make(chan lingo.Lexeme)
+	l.Errors = make(chan error)
+}
+
 func (l *Lexer) next() rune {
 	var err error
 	l.r, l.width, err = l.input.ReadRune()
