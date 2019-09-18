@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"io"
 	"strings"
+	"sync"
 
 	"golang.org/x/text/unicode/norm"
 
@@ -30,6 +31,8 @@ type Lexer struct {
 
 	Output chan lingo.Lexeme
 	Errors chan error
+
+	sync.Mutex
 }
 
 func New(name string, r io.Reader) *Lexer {
@@ -49,6 +52,8 @@ func New(name string, r io.Reader) *Lexer {
 }
 
 func (l *Lexer) Run() {
+	l.Lock()
+	defer l.Unlock()
 	defer close(l.Output)
 	for state := lexText; state != nil; {
 		state = state(l)
@@ -57,10 +62,12 @@ func (l *Lexer) Run() {
 
 // Reset resets the buffers. It creates a new Output and Error channel
 func (l *Lexer) Reset(r io.Reader) {
+	l.Lock()
 	l.input.Reset(r)
 	l.buf.Reset()
 	l.Output = make(chan lingo.Lexeme)
 	l.Errors = make(chan error)
+	l.Unlock()
 }
 
 func (l *Lexer) next() rune {
