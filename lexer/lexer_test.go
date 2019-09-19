@@ -135,7 +135,7 @@ var lexerTests = []lexerTest{
 		{"", lingo.EOF, 0, 0},
 	}},
 
-	{"abbrev", "USB, made in U.S.A. e.g", []lingo.Lexeme{
+	{"abbrev", "USB, made in U.S.A. e.g t/away c/o", []lingo.Lexeme{
 		{"USB", lingo.Word, 0, 1},
 		{",", lingo.Punctuation, 0, 4},
 		{"made", lingo.Word, 0, 6},
@@ -143,6 +143,8 @@ var lexerTests = []lexerTest{
 		{"U.S.A", lingo.Word, 0, 14},
 		{".", lingo.Punctuation, 0, 19},
 		{"e.g", lingo.Word, 0, 0},
+		{"t/away", lingo.Word, 0, 0},
+		{"c/o", lingo.Word, 0, 0},
 		{"", lingo.EOF, 0, 20},
 	}},
 

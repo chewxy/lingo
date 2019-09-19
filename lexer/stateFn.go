@@ -60,7 +60,7 @@ func lexText(l *Lexer) (fn stateFn) {
 					l.width = 0
 					fn = lexPunctuation
 					goto finishup // goto because there are other cases below
-				case unicode.IsLetter(n) && (next == '.' || next == '@' || next == '-'):
+				case unicode.IsLetter(n) && (next == '.' || next == '@' || next == '-' || next == '/'):
 					// acceptable midstream punctuations in words are emails and abbreviations
 					l.accept()
 					return lexText
