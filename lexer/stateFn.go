@@ -44,7 +44,7 @@ func lexText(l *Lexer) (fn stateFn) {
 				}
 				fn = lexPunctuation
 			case unicode.IsPunct(next):
-				// for things like "u.s" or "i.e." or "e.g."
+				// For things like "u.s" or "i.e." or "e.g."
 				n := l.peek()
 
 				switch {
@@ -60,7 +60,8 @@ func lexText(l *Lexer) (fn stateFn) {
 					l.width = 0
 					fn = lexPunctuation
 					goto finishup // goto because there are other cases below
-				case unicode.IsLetter(n):
+				case unicode.IsLetter(n) && (next == '.' || next == '@' || next == '-'):
+					// acceptable midstream punctuations in words are emails and abbreviations
 					l.accept()
 					return lexText
 				default:
@@ -70,13 +71,15 @@ func lexText(l *Lexer) (fn stateFn) {
 				}
 
 			case unicode.IsSymbol(next):
-				// for things like "e-mail"
-				n := l.next()
+				// for things like "ke$ha"
+				// bear in mind that "$ell" will be split into two lexemes.
+				n := l.peek()
 				if unicode.IsLetter(n) {
+					l.backup()
+					l.accept()
 					return lexText
 				}
-
-				l.backup()
+				//l.backup()
 				fn = lexSymbol
 			case next == 'n':
 				// for things like "don't" or "doesn't"

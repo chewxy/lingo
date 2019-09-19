@@ -106,11 +106,33 @@ var lexerTests = []lexerTest{
 		{"", lingo.EOF, 0, 11},
 	}},
 
+	{"parenthesis should be considered separate", "USA(United States of America)", []lingo.Lexeme{
+		{"USA", lingo.Word, 0, 1},
+		{"(", lingo.Punctuation, 0, 1},
+		{"United", lingo.Word, 0, 1},
+		{"States", lingo.Word, 0, 1},
+		{"of", lingo.Word, 0, 1},
+		{"America", lingo.Word, 0, 1},
+		{")", lingo.Punctuation, 0, 1},
+		{"", lingo.EOF, 0, 0},
+	}},
+
 	{"midstream puncuation", "like:this", []lingo.Lexeme{
 		{"like", lingo.Word, 0, 1},
 		{":", lingo.Punctuation, 0, 5},
 		{"this", lingo.Word, 0, 6},
 		{"", lingo.EOF, 0, 7},
+	}},
+
+	{"midstream symbols", "e-meet ke$ha by e-mail $ell anti-inflammatory", []lingo.Lexeme{
+		{"e-meet", lingo.Word, 0, 1},
+		{"ke$ha", lingo.Word, 0, 1},
+		{"by", lingo.Word, 0, 1},
+		{"e-mail", lingo.Word, 0, 1},
+		{"$", lingo.Symbol, 0, 1},
+		{"ell", lingo.Word, 0, 1},
+		{"anti-inflammatory", lingo.Word, 0, 1},
+		{"", lingo.EOF, 0, 0},
 	}},
 
 	{"abbrev", "USB, made in U.S.A. e.g", []lingo.Lexeme{
