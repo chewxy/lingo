@@ -12,7 +12,7 @@ import (
 type Performance struct {
 	Iter int     // which training iteration is this?
 	UAS  float64 // Unlabelled Attachment Score
-	LAS  float64 // Labelled Attachment Score
+	LAS  float64 // Labeled Attachment Score
 	UEM  float64 // Unlabelled Exact Match
 	Root float64 // Correct Roots Ratio
 }
