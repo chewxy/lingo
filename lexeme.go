@@ -29,6 +29,7 @@ type Lexeme struct {
 
 	Line int
 	Col  int
+	Pos  int
 }
 
 func MakeLexeme(s string, t LexemeType) Lexeme {
@@ -37,6 +38,7 @@ func MakeLexeme(s string, t LexemeType) Lexeme {
 		LexemeType: t,
 		Line:       -1,
 		Col:        -1,
+		Pos:        -1,
 	}
 }
 
@@ -60,9 +62,9 @@ func (l Lexeme) String() string {
 func (l Lexeme) GoString() string {
 	switch l.LexemeType {
 	case EOF:
-		return fmt.Sprintf("EOF: %q (%d, %d)", l.Value, l.Line, l.Col)
+		return fmt.Sprintf("EOF: %q (%d, %d, %d)", l.Value, l.Line, l.Col, l.Pos)
 	default:
-		return fmt.Sprintf("%s: %q(%d, %d)", l.LexemeType, l.Value, l.Line, l.Col)
+		return fmt.Sprintf("%s: %q (%d, %d, %d)", l.LexemeType, l.Value, l.Line, l.Col, l.Pos)
 	}
 }
 
