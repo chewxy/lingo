@@ -12,7 +12,6 @@ go:
 
 env:
   - GO111MODULE=on
-  - GOFLAGS="-mod=readonly"
 
 matrix:
   allow_failures:
