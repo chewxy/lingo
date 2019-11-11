@@ -3,8 +3,8 @@ language: go
 branches:
   only:
     - master
+
 go:
-  - 1.10.x
   - 1.11.x
   - 1.12.x
   - 1.13.x
@@ -12,6 +12,7 @@ go:
 
 env:
   - GO111MODULE=on
+  - GOFLAGS="-mod=readonly"
 
 matrix:
   allow_failures:
