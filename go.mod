@@ -35,3 +35,5 @@ require (
 	gorgonia.org/vecf32 v0.7.0 // indirect
 	gorgonia.org/vecf64 v0.7.0 // indirect
 )
+
+go 1.13

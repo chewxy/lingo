@@ -1,6 +1,7 @@
 package corpus
 
 import (
+	"errors"
 	"sync/atomic"
 	"unicode/utf8"
 )
@@ -161,4 +162,29 @@ func (c *Corpus) Merge(other *Corpus) {
 			c.totalFreq += freq - 1
 		}
 	}
+}
+
+// Replace replaces the content of a word. The old reference remains.
+//
+// e.g: c.Replace("foo", "bar")
+// c.Id("foo") will still return a ID. The ID will be the same as c.Id("bar")
+func (c *Corpus) Replace(a, with string) error {
+	old, ok := c.ids[a]
+	if !ok {
+		return errors.Errorf("Cannot replace %q with %q. %q is not found", a, with, a)
+	}
+	if _, ok := c.ids[with]; ok {
+		return errors.Errorf("Cannot replace %q with %q. %q exists in the corpus", a, with, with)
+	}
+	c.words[old] = with
+	return nil
+
+}
+
+func (c *Corpus) ReplaceWord(id int, with string) error {
+	if id >= len(c.words) {
+		return errors.Errorf("ID %d out of bounds", id)
+	}
+	c.words[id] = with
+	return nil
 }
