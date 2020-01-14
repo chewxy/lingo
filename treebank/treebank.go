@@ -93,7 +93,7 @@ func ReadConllu(reader io.Reader) []SentenceTag {
 			unknownDepType[depType] = empty
 		}
 
-		lexeme := lingo.Lexeme{word, lexType, sentenceCount, colCount}
+		lexeme := lingo.Lexeme{word, lexType, sentenceCount, colCount, 0} // TODO: add byte offset
 		s = append(s, lexeme)
 		st = append(st, t)
 		sh = append(sh, h)
