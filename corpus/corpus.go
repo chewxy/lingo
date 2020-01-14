@@ -1,9 +1,10 @@
 package corpus
 
 import (
-	"errors"
 	"sync/atomic"
 	"unicode/utf8"
+
+	"github.com/pkg/errors"
 )
 
 // Corpus is a data structure holding the relevant metadata and information for a corpus of text.
@@ -181,9 +182,13 @@ func (c *Corpus) Replace(a, with string) error {
 
 }
 
+// ReplaceWord replaces the word associated with the given ID. The old reference remains.
 func (c *Corpus) ReplaceWord(id int, with string) error {
 	if id >= len(c.words) {
-		return errors.Errorf("ID %d out of bounds", id)
+		return errors.Errorf("Cannot replace word with ID %d. Out of bounds.", id)
+	}
+	if _, ok := c.ids[with]; ok {
+		return errors.Errorf("Cannot replace word with ID %d with %q. %q exists in the corpus", id, with, with)
 	}
 	c.words[id] = with
 	return nil
