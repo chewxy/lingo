@@ -15,19 +15,19 @@ func WithWords(a []string) ConsOpt {
 		s := set.Strings(a)
 		c.words = s
 		c.frequencies = make([]int, len(s))
-		for i := range c.frequencies {
-			c.frequencies[i] = 1
-		}
 
 		ids := make(map[string]int)
 		maxID := len(s)
 		totalFreq := len(s)
 		var maxWL int
-		for i, w := range a {
+		for i, w := range s {
 			if len(w) > maxWL {
 				maxWL = len(w)
 			}
 			ids[w] = i
+		}
+		for _, w := range s {
+			c.frequencies[ids[w]]++
 		}
 
 		c.ids = ids
