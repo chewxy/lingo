@@ -9,6 +9,41 @@ import (
 	"strings"
 )
 
+// sortutil is a utility struct meant to sort words based on IDs
+type sortutil struct {
+	words []string
+	ids   []int
+	freqs []int
+}
+
+func (s *sortutil) Len() int           { return len(s.words) }
+func (s *sortutil) Less(i, j int) bool { return s.ids[i] < s.ids[j] }
+func (s *sortutil) Swap(i, j int) {
+	s.words[i], s.words[j] = s.words[j], s.words[i]
+	s.ids[i], s.ids[j] = s.ids[j], s.ids[i]
+	if len(s.freqs) > 0 {
+		s.freqs[i], s.freqs[j] = s.freqs[j], s.freqs[i]
+	}
+}
+
+// ToDictWithFreq returns a simple marshalable type. Conceptually it's a JSON object with the words as the keys. The values are a pair - ID and Freq.
+func ToDictWithFreq(c *Corpus) map[string]struct{ ID, Freq int } {
+	retVal := make(map[string]struct{ ID, Freq int })
+	for i, w := range c.words {
+		retVal[w] = struct{ ID, Freq int }{i, c.frequencies[i]}
+	}
+	return retVal
+}
+
+// ToDict returns a marshalable dict. It returns a copy of the ID mapping.
+func ToDict(c *Corpus) map[string]int {
+	retVal := make(map[string]int)
+	for k, v := range c.ids {
+		retVal[k] = v
+	}
+	return retVal
+}
+
 // GobEncode implements GobEncoder for *Corpus
 func (c *Corpus) GobEncode() ([]byte, error) {
 	var buf bytes.Buffer

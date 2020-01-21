@@ -40,6 +40,36 @@ func TestCorpusGob(t *testing.T) {
 	}
 }
 
+func TestCorpusToDict(t *testing.T) {
+	assert := assert.New(t)
+	c, _ := Construct(WithWords([]string{"World", "Hello", "World"}))
+
+	d := ToDict(c)
+	c2, err := Construct(FromDict(d))
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(c.words, c2.words, "Expected words to be the same")
+	assert.Equal(c.ids, c2.ids, "Expected IDs to be the same")
+	assert.NotEqual(c.frequencies, c2.frequencies, "Expected frequencies to not be the same")
+	assert.Equal(c.maxid, c2.maxid, "Expected maxID to be the same")
+	assert.NotEqual(c.totalFreq, c2.totalFreq, "Expected totalFreq to be different.")
+	assert.Equal(c.maxWordLength, c2.maxWordLength, "Expected maxWordLength to be the same")
+}
+
+func TestCorpusToDictWithFreq(t *testing.T) {
+	assert := assert.New(t)
+	c, _ := Construct(WithWords([]string{"World", "Hello", "World"}))
+
+	d := ToDictWithFreq(c)
+	c2, err := Construct(FromDictWithFreq(d))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	assert.Equal(c, c2)
+}
+
 func TestLoadOneGram(t *testing.T) {
 	assert := assert.New(t)
 	r := strings.NewReader(sample1Gram)
