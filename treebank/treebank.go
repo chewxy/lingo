@@ -3,6 +3,7 @@ package treebank
 import (
 	"archive/zip"
 	"io"
+	"log"
 
 	"github.com/chewxy/lingo"
 
@@ -21,6 +22,7 @@ type Loader func(string) []SentenceTag
 func LoadUniversal(fileName string) []SentenceTag {
 	f, err := os.Open(fileName)
 	if err != nil {
+		log.Printf("filename %q", fileName)
 		panic(err)
 	}
 	defer f.Close()
@@ -42,7 +44,10 @@ func ReadConllu(reader io.Reader) []SentenceTag {
 	colCount := 0
 	for bs := bufio.NewScanner(reader); bs.Scan(); colCount++ {
 		l := bs.Text()
-
+		if strings.HasPrefix(l, "#") {
+			// comments
+			continue
+		}
 		if len(l) == 0 {
 			// then this is a new sentence
 			sentences = finish(s, st, sh, sdt, sentences)

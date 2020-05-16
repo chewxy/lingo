@@ -3,7 +3,6 @@ package lexer
 import (
 	"bufio"
 	"bytes"
-	"fmt"
 	"io"
 	"strings"
 	"sync"
@@ -158,8 +157,6 @@ func (l *Lexer) emit(t lingo.LexemeType) {
 	lex.Line = l.line
 	lex.Col = l.start
 	lex.Pos = l.pos - l.buf.Len()
-
-	fmt.Printf("%s = lexer pos: %d, start: %d, width: %d, col: %d, buf.len(): %d = %q\n", normalized, l.pos, l.start, l.width, l.col, l.buf.Len(), l.buf.String())
 
 	// TODO: sometimes the offset is wrong on leading tokens since l.pos starts at 1
 	// if lex.Pos < 0 {
