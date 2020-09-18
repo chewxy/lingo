@@ -1,7 +1,6 @@
 package corpus
 
 import (
-	"gorgonia.org/gorgonia"
 	"gorgonia.org/tensor"
 )
 
@@ -9,10 +8,10 @@ import (
 //https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation
 type LDAModel struct {
 	// params
-	Alpha tensor.Tensor   // is a Row
-	Eta   tensor.Tensor   // is a Col
-	Kappa gorgonia.Scalar // Decay
-	Tau0  gorgonia.Scalar // offset
+	Alpha tensor.Tensor // is a Row
+	Eta   tensor.Tensor // is a Col
+	//Kappa gorgonia.Scalar // Decay
+	//Tau0  gorgonia.Scalar // offset
 
 	// parameters needed for working
 	Topics      int
