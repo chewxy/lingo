@@ -11,7 +11,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/flynn-archive/go-shlex v0.0.0-20150515145356-3f9db97f8568 // indirect
-	github.com/gogo/protobuf v1.2.1 // indirect
+	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.2.0 // indirect
 	github.com/google/flatbuffers v1.10.0 // indirect
 	github.com/kljensen/snowball v0.6.0
@@ -23,9 +23,7 @@ require (
 	github.com/stretchr/testify v1.3.0
 	github.com/xtgo/set v1.0.0
 	golang.org/x/exp v0.0.0-20190221220918-438050ddec5e // indirect
-	golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4 // indirect
-	golang.org/x/sys v0.0.0-20190225065934-cc5685c2db12 // indirect
-	golang.org/x/text v0.3.0
+	golang.org/x/text v0.3.3
 	gonum.org/v1/gonum v0.0.0-20190221132855-8ea67971a689 // indirect
 	gonum.org/v1/netlib v0.0.0-20190221094214-0632e2ebbd2d // indirect
 	gorgonia.org/cu v0.9.0-beta // indirect
