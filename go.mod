@@ -24,7 +24,7 @@ require (
 	github.com/xtgo/set v1.0.0
 	golang.org/x/exp v0.0.0-20190221220918-438050ddec5e // indirect
 	golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4 // indirect
-	golang.org/x/sys v0.0.0-20190225065934-cc5685c2db12 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.3.0
 	gonum.org/v1/gonum v0.0.0-20190221132855-8ea67971a689 // indirect
 	gonum.org/v1/netlib v0.0.0-20190221094214-0632e2ebbd2d // indirect
